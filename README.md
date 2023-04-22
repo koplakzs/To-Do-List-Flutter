@@ -1,6 +1,6 @@
 # to_do_list
 
-A new Flutter project.
+Simple TO DO LIST Apps. 
 
 ## Getting Started
 
