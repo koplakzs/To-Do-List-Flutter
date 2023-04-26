@@ -33,9 +33,8 @@ class Login extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Enter Username',
+                    'Input Your Name',
                     style: TextStyle(
-                      fontFamily: 'Satisfy',
                       fontSize: 35,
                     ),
                     textAlign: TextAlign.center,
