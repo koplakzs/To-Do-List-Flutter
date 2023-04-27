@@ -13,7 +13,7 @@ class DatabaseHelper {
 
   late Database _db;
 
-  Future<void> _init() async {
+  Future<void> init() async {
     final documentDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentDirectory.path, _dbName);
 
@@ -27,6 +27,12 @@ class DatabaseHelper {
   }
 
   Future<int> insertUser(Map<String, dynamic> row) async {
+    await init();
     return await _db.insert(user, row);
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllRows() async {
+    await init();
+    return await _db.query(user);
   }
 }

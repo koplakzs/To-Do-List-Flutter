@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
+import 'package:to_do_list/models/database_helper.dart';
 import 'package:to_do_list/views/my_theme.dart';
+
+final db = DatabaseHelper();
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -47,13 +47,29 @@ class Login extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {
                         String data = textUsername.text;
-                        print(data);
+                        _insert(data);
                       },
-                      child: const Text('Login'))
+                      child: const Text('Login')),
+                  ElevatedButton(onPressed: _query, child: const Text('Show'))
                 ],
               ),
             ),
           )),
     );
+  }
+
+  void _insert(String username) async {
+    Map<String, dynamic> row = {'username': username};
+
+    final id = await db.insertUser(row);
+    debugPrint('inserted row id : $id');
+  }
+
+  void _query() async {
+    final allRows = await db.queryAllRows();
+    debugPrint('query all rows:');
+    for (final row in allRows) {
+      debugPrint(row.toString());
+    }
   }
 }
