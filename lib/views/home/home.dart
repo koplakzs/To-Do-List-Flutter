@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:to_do_list/models/database_helper.dart';
+import 'package:to_do_list/models/user_model.dart';
+import 'package:to_do_list/views/login.dart';
+
+DatabaseHelper db = DatabaseHelper.instance;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,8 +13,43 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late User user;
+// final String username;
+//   final User user;
+
+//   Future<void> getUserData() async {
+//     username = await db.getUser();
+//     user = User(username: username);
+//   }
+
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     getUserData();
+//   }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        body: FutureBuilder(
+            future: db.isDatabaseEmpty(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text('Terjadi Kesalahan'),
+                );
+              } else if (snapshot.hasData == true) {
+                return Builder(builder: (context) {
+                  final String username = db.getUser();
+                });
+              } else {
+                return const Login();
+              }
+            }));
   }
 }
