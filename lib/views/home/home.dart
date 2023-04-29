@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/models/database_helper.dart';
-import 'package:to_do_list/models/user_model.dart';
-import 'package:to_do_list/views-models/user_view_models.dart';
+import 'package:to_do_list/view_models/user_view_models.dart';
 import 'package:to_do_list/views/login.dart';
 
 class Home extends StatefulWidget {
