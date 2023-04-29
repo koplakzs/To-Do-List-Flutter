@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/views/home/home.dart';
 import 'package:to_do_list/views/home_page.dart';
-import 'package:to_do_list/views/login.dart';
 
 void main() {
   runApp(const MyApp());

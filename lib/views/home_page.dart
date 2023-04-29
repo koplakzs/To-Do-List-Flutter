@@ -27,10 +27,10 @@ class _HomePageState extends State<HomePage> {
                 return const Center(
                   child: Text('Terjadi Kesalahan'),
                 );
-              } else if (snapshot.hasData == true) {
-                return const Home(status: 'user');
-              } else {
+              } else if (snapshot.data == true) {
                 return const Login();
+              } else {
+                return const Home(status: 'user');
               }
             }));
   }

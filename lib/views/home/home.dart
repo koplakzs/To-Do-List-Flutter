@@ -39,9 +39,28 @@ class _HomeState extends State<Home> {
       final user = _userViewModel.user;
       return Container(
         child: Center(
-          child: Text('Halooo ${user.username}'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Halooo ${user.username}'),
+              ElevatedButton(
+                  onPressed: () {
+                    db.deleteData();
+                  },
+                  child: const Text('Delete')),
+              ElevatedButton(onPressed: _show, child: const Text('Show')),
+            ],
+          ),
         ),
       );
+    }
+  }
+
+  void _show() async {
+    final id = await db.queryAllRows();
+    debugPrint('query all rows:');
+    for (final row in id) {
+      debugPrint(row.toString());
     }
   }
 }

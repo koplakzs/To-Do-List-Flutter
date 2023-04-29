@@ -52,6 +52,11 @@ class DatabaseHelper {
     return await db.query(tableUser);
   }
 
+  Future<void> deleteData() async {
+    Database db = await instance.database;
+    await db.delete(tableUser, where: 'status = ?', whereArgs: ['user']);
+  }
+
   Future<bool> isDatabaseEmpty() async {
     Database db = await instance.database;
     final count = Sqflite.firstIntValue(
