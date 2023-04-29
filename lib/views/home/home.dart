@@ -1,55 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/models/database_helper.dart';
 import 'package:to_do_list/models/user_model.dart';
+import 'package:to_do_list/views-models/user_view_models.dart';
 import 'package:to_do_list/views/login.dart';
 
-DatabaseHelper db = DatabaseHelper.instance;
-
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String status;
+  const Home({Key? key, required this.status}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  late User user;
-// final String username;
-//   final User user;
+  final _userViewModel = UserViewModel();
 
-//   Future<void> getUserData() async {
-//     username = await db.getUser();
-//     user = User(username: username);
-//   }
+  Future<void> _loadUser() async {
+    await _userViewModel.loadUser(widget.status);
+    setState(() {});
+  }
 
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     getUserData();
-//   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadUser();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FutureBuilder(
-            future: db.isDatabaseEmpty(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                return const Center(
-                  child: Text('Terjadi Kesalahan'),
-                );
-              } else if (snapshot.hasData == true) {
-                return Builder(builder: (context) {
-                  final String username = db.getUser();
-                });
-              } else {
-                return const Login();
-              }
-            }));
+    if (_userViewModel.user.username.isEmpty) {
+      return Container(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      final user = _userViewModel.user;
+      return Container(
+        child: Center(
+          child: Text('Halooo ${user.username}'),
+        ),
+      );
+    }
   }
 }

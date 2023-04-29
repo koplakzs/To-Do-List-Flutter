@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/views/home/home.dart';
+import 'package:to_do_list/views/home_page.dart';
 import 'package:to_do_list/views/login.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: "/",
       routes: {
-        '/': (context) => const Home(),
+        '/': (context) => const HomePage(),
       },
     );
   }

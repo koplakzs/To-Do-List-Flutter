@@ -49,6 +49,7 @@ class Login extends StatelessWidget {
                       onPressed: () {
                         String data = textUsername.text;
                         _insert(data);
+                        Navigator.pushNamed(context, '/');
                       },
                       child: const Text('Login')),
                 ],
