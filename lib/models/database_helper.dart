@@ -61,7 +61,7 @@ class DatabaseHelper {
     Database db = await instance.database;
     final count = Sqflite.firstIntValue(
         await db.rawQuery('SELECT COUNT(*) FROM $tableUser'));
-    print(count);
+    // print(count);
     return count == 0;
   }
 

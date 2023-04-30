@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/view_models/user_view_models.dart';
+import 'package:to_do_list/views/home/widgets/task.dart';
+import 'package:to_do_list/views/home/widgets/title.dart';
 import 'package:to_do_list/views/login.dart';
+import 'package:to_do_list/views/my_theme.dart';
 
 class Home extends StatefulWidget {
   final String status;
@@ -36,21 +39,11 @@ class _HomeState extends State<Home> {
     } else {
       final user = _userViewModel.user;
       return Container(
-        child: Center(
+          color: MyTheme.grey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Halooo ${user.username}'),
-              ElevatedButton(
-                  onPressed: () {
-                    db.deleteData();
-                  },
-                  child: const Text('Delete')),
-              ElevatedButton(onPressed: _show, child: const Text('Show')),
-            ],
-          ),
-        ),
-      );
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [Header(username: user.username), Task()],
+          ));
     }
   }
 
