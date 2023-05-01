@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:to_do_list/views/home/widgets/add_task_table.dart';
 import 'package:to_do_list/views/home/widgets/task_table.dart';
 import 'package:to_do_list/views/my_theme.dart';
@@ -17,8 +15,8 @@ class _TaskState extends State<Task> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.only(top: 20),
-        padding: EdgeInsets.all(20),
+        margin: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
             color: MyTheme.white,
             borderRadius: BorderRadius.circular(10),
@@ -32,7 +30,12 @@ class _TaskState extends State<Task> {
         child: Row(
           children: [
             Column(
-              children: [TaskTable(), AddTaskTable()],
+              children: [
+                TaskTable(name: 'Home', icon: Icons.home, onTap: () => {}),
+                AddTaskTable(
+                  onTap: () => {},
+                )
+              ],
             ),
           ],
         ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
 class AddTaskTable extends StatelessWidget {
-  const AddTaskTable({super.key});
+  final void Function() onTap;
+
+  const AddTaskTable({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +24,12 @@ class AddTaskTable extends StatelessWidget {
                 offset: Offset(0, 0))
           ]),
       child: GestureDetector(
+          onTap: onTap,
           child: const Center(
               child: Icon(
-        Icons.add,
-        size: 50,
-      ))),
+            Icons.add,
+            size: 50,
+          ))),
     );
   }
 }
