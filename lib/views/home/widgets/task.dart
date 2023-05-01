@@ -27,17 +27,17 @@ class _TaskState extends State<Task> {
                   blurRadius: 20,
                   offset: Offset(0, 0))
             ]),
-        child: Row(
-          children: [
-            Column(
-              children: [
-                TaskTable(name: 'Home', icon: Icons.home, onTap: () => {}),
-                AddTaskTable(
-                  onTap: () => {},
-                )
-              ],
-            ),
-          ],
+        child: GridView.builder(
+          itemCount: 6,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+          itemBuilder: (BuildContext context, int index) {
+            if (index < 5) {
+              return TaskTable(name: 'home', icon: Icons.home, onTap: () => {});
+            } else {
+              return AddTaskTable(onTap: () => {});
+            }
+          },
         ),
       ),
     );

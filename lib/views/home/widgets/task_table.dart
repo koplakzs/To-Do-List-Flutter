@@ -12,9 +12,9 @@ class TaskTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
-      width: 90,
-      margin: EdgeInsets.only(top: 20),
+      height: 100,
+      width: 100,
+      margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: MyTheme.white,

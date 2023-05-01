@@ -9,9 +9,9 @@ class AddTaskTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
-      width: 90,
-      margin: const EdgeInsets.only(top: 20),
+      height: 100,
+      width: 100,
+      margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: MyTheme.white,
