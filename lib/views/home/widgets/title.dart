@@ -1,7 +1,12 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
+import 'package:to_do_list/models/database_helper.dart';
+import 'package:to_do_list/views/home/widgets/exit._button.dart';
+import 'package:to_do_list/views/login.dart';
 import 'package:to_do_list/views/my_theme.dart';
+
+DatabaseHelper db = DatabaseHelper.instance;
 
 class Header extends StatelessWidget {
   final String username;
@@ -23,6 +28,7 @@ class Header extends StatelessWidget {
                 offset: Offset(0, 0))
           ]),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,8 +54,16 @@ class Header extends StatelessWidget {
                   ))
             ],
           ),
+          ExitButton(onTap: () {
+            _delete();
+            Navigator.pushReplacementNamed(context, "/login");
+          })
         ],
       ),
     );
+  }
+
+  void _delete() async {
+    await db.deleteData();
   }
 }
