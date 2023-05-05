@@ -1,15 +1,12 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:to_do_list/models/database_helper.dart';
 import 'package:to_do_list/views/home/widgets/exit._button.dart';
-import 'package:to_do_list/views/login.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
 DatabaseHelper db = DatabaseHelper.instance;
 
 class Header extends StatelessWidget {
-  final String username;
+  final String? username;
   const Header({Key? key, required this.username}) : super(key: key);
 
   @override

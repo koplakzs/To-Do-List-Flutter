@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     if (_userViewModel.user.username.isEmpty) {
-      return Container(
+      return SizedBox(
         child: const Center(
           child: CircularProgressIndicator(),
         ),
@@ -44,14 +44,6 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [Header(username: user.username), Task()],
           ));
-    }
-  }
-
-  void _show() async {
-    final id = await db.queryAllRows();
-    debugPrint('query all rows:');
-    for (final row in id) {
-      debugPrint(row.toString());
     }
   }
 }

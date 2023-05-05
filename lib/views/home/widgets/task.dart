@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list/models/database_helper.dart';
 import 'package:to_do_list/views/home/widgets/add_task_table.dart';
 import 'package:to_do_list/views/home/widgets/task_table.dart';
 import 'package:to_do_list/views/my_theme.dart';
+
+DatabaseHelper db = DatabaseHelper.instance;
 
 class Task extends StatefulWidget {
   const Task({super.key});
@@ -11,6 +14,22 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
+  int? result;
+
+  Future<void> getData() async {
+    int? count = await db.countTables();
+    setState(() {
+      result = count;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -28,14 +47,14 @@ class _TaskState extends State<Task> {
                   offset: Offset(0, 0))
             ]),
         child: GridView.builder(
-          itemCount: 6,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+          itemCount: result != null ? result! - 1 : 0,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4),
           itemBuilder: (BuildContext context, int index) {
-            if (index < 5) {
-              return TaskTable(name: 'home', icon: Icons.home, onTap: () => {});
-            } else {
+            if (index >= result! - 2) {
               return AddTaskTable(onTap: () => {});
+            } else {
+              return TaskTable(name: 'home', icon: Icons.home, onTap: () => {});
             }
           },
         ),

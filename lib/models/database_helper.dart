@@ -42,6 +42,7 @@ class DatabaseHelper {
         'CREATE TABLE $tableUser (id INTEGER PRIMARY KEY, username TEXT NOT NULL, status TEXT NOT NULL)');
   }
 
+  //Function di Database
   Future<int> insertUser(Map<String, dynamic> row) async {
     Database db = await instance.database;
     return await db.insert(tableUser, row);
@@ -75,5 +76,12 @@ class DatabaseHelper {
       return UserModel(username: result.first['username'] as String);
     }
     return UserModel(username: 'NO data');
+  }
+
+  Future<int> countTables() async {
+    final Database db = await instance.database;
+    final List<Map<String, dynamic>> count = await db
+        .rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table'");
+    return Sqflite.firstIntValue(count) ?? 0;
   }
 }
