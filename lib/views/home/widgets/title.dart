@@ -1,6 +1,7 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:to_do_list/models/database_helper.dart';
 import 'package:to_do_list/views/home/widgets/exit._button.dart';
+import 'package:to_do_list/views/login.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
 DatabaseHelper db = DatabaseHelper.instance;
@@ -12,8 +13,8 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      margin: const EdgeInsets.only(top: 40, bottom: 10, left: 10, right: 10),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
       decoration: BoxDecoration(
           color: MyTheme.white,
           borderRadius: BorderRadius.circular(10),
@@ -53,7 +54,9 @@ class Header extends StatelessWidget {
           ),
           ExitButton(onTap: () {
             _delete();
-            Navigator.pushReplacementNamed(context, "/login");
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const Login()),
+                (route) => false);
           })
         ],
       ),

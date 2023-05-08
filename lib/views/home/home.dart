@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:to_do_list/view_models/user_view_models.dart';
 import 'package:to_do_list/views/home/widgets/task.dart';
 import 'package:to_do_list/views/home/widgets/title.dart';
-import 'package:to_do_list/views/login.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
 class Home extends StatefulWidget {
@@ -31,8 +30,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     if (_userViewModel.user.username.isEmpty) {
-      return SizedBox(
-        child: const Center(
+      return const SizedBox(
+        child: Center(
           child: CircularProgressIndicator(),
         ),
       );

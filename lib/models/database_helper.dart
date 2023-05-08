@@ -12,7 +12,6 @@ class DatabaseHelper {
 
   // pembuatan 2 table, table user untuk login dan table todo untuk list todo
   static const tableUser = 'user';
-  static const tableTodo = 'todo';
 
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
@@ -24,11 +23,6 @@ class DatabaseHelper {
     _database = await _init();
     return _database!;
   }
-  // late Database _db;
-
-  // DatabaseHelper() {
-  //   init();
-  // }
 
   _init() async {
     final documentDirectory = await getApplicationDocumentsDirectory();
@@ -62,7 +56,6 @@ class DatabaseHelper {
     Database db = await instance.database;
     final count = Sqflite.firstIntValue(
         await db.rawQuery('SELECT COUNT(*) FROM $tableUser'));
-    // print(count);
     return count == 0;
   }
 
@@ -83,5 +76,18 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> count = await db
         .rawQuery("SELECT count(*) FROM sqlite_master WHERE type = 'table'");
     return Sqflite.firstIntValue(count) ?? 0;
+  }
+
+  // Create Table Category
+  Future _createHealth() async {
+    Database db = await instance.database;
+    await db.execute(
+        'CREATE TABLE health (id INTEGER PRIMARY KEY, task TEXT NOT NULL,detail TEXT NOT NULL, status TEXT NOT NULL)');
+  }
+
+  Future _createWork() async {
+    Database db = await instance.database;
+    await db.execute(
+        'CREATE TABLE work (id INTEGER PRIMARY KEY, task TEXT NOT NULL,detail TEXT NOT NULL, status TEXT NOT NULL)');
   }
 }

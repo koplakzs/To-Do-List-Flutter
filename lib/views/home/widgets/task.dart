@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/models/database_helper.dart';
-import 'package:to_do_list/views/home/widgets/add_task_table.dart';
-import 'package:to_do_list/views/home/widgets/task_table.dart';
+import 'package:to_do_list/views/home/widgets/add_task_view.dart';
+import 'package:to_do_list/views/home/widgets/task_view.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
 DatabaseHelper db = DatabaseHelper.instance;
@@ -52,9 +52,10 @@ class _TaskState extends State<Task> {
               crossAxisCount: 4),
           itemBuilder: (BuildContext context, int index) {
             if (index >= result! - 2) {
-              return AddTaskTable(onTap: () => {});
+              return AddTaskTable(
+                  onTap: () => {Navigator.pushNamed(context, '/category')});
             } else {
-              return TaskTable(name: 'home', icon: Icons.home, onTap: () => {});
+              return TaskView(name: 'home', icon: Icons.home, onTap: () => {});
             }
           },
         ),

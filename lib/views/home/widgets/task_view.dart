@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
-class TaskTable extends StatelessWidget {
+class TaskView extends StatelessWidget {
   final String name;
   final IconData icon;
   final void Function() onTap;
-  const TaskTable(
+  const TaskView(
       {Key? key, required this.name, required this.icon, required this.onTap})
       : super(key: key);
 
@@ -14,8 +14,8 @@ class TaskTable extends StatelessWidget {
     return Container(
       height: 100,
       width: 100,
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: MyTheme.white,
           borderRadius: BorderRadius.circular(10),
