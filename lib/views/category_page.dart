@@ -11,6 +11,13 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  List task = [
+    ["Work", "Icons.0xe25b"],
+    ["Health", "Icons.0xe25b"],
+    ["Test", "Icons.0xe25b"],
+    ["Test Juga", "Icons.0xe25b"]
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +28,12 @@ class _CategoryPageState extends State<CategoryPage> {
           color: MyTheme.grey,
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
           child: ListView.builder(
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int index) => const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
-                    child: CategoryTask(),
+              itemCount: task.length,
+              itemBuilder: (BuildContext context, int index) => Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+                    child: CategoryTask(
+                        title: task[index][0], icon: task[index][1]),
                   )),
         ));
   }

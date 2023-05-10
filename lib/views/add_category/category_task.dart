@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:to_do_list/views/my_theme.dart';
 
 class CategoryTask extends StatelessWidget {
-  const CategoryTask({super.key});
+  final String title, icon;
+  const CategoryTask({Key? key, required this.title, required this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<String> iconParts = icon.split(".");
+    IconData iconData = Icons.error; // Ikon default jika terjadi kesalahan
+
+    if (iconParts.length == 2) {
+      try {
+        int iconCode = int.parse(iconParts[1], radix: 16);
+        iconData = IconData(0xe25b, fontFamily: 'MaterialIcons');
+      } on FormatException {
+        // Terjadi kesalahan ketika mengonversi kode ikon menjadi bilangan bulat
+        print('Kesalahan: Kode ikon tidak valid');
+      }
+    } else {
+      // Terjadi kesalahan dalam format string ikon
+      print('Kesalahan: Format string ikon salah');
+    }
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             foregroundColor: Colors.black12,
@@ -21,9 +36,9 @@ class CategoryTask extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           height: 70,
           child: Row(
-            children: const [
+            children: [
               Icon(
-                Icons.favorite,
+                iconData,
                 size: 30,
                 color: Color.fromARGB(255, 52, 221, 5),
               ),
@@ -31,7 +46,7 @@ class CategoryTask extends StatelessWidget {
                 width: 30,
               ),
               Text(
-                "Home",
+                title,
                 style: TextStyle(
                     fontFamily: 'poppins', fontSize: 18, color: Colors.black),
               )
